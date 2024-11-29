@@ -88,6 +88,9 @@ const config: Config = {
         },
       ],
     },
+    math: {
+        mathjax: true
+    }
     footer: {
       style: 'dark',
       links: [
