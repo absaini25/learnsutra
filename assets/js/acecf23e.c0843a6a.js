@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklearnsutra=self.webpackChunklearnsutra||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/learnsutra/blog","blogTitle":"Blog","authorsListPath":"/learnsutra/blog/authors"}')}}]);

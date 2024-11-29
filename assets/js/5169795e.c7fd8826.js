@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklearnsutra=self.webpackChunklearnsutra||[]).push([[6352],{2564:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/learnsutra/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
