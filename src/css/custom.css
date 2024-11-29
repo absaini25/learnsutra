@@ -28,3 +28,12 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.katex-display > .katex {
+  text-wrap: wrap;
+  text-align: left;
+}
+
+pre code {
+  max-width: 100%;
+}
