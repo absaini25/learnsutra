@@ -14,107 +14,156 @@ Now that you understand how to implement Dynamic Programming (DP) using Memoizat
 Dynamic Programming is applicable when a problem exhibits the following characteristics:
 
 1. **Optimal Substructure**
-    - The solution to a larger problem can be constructed from the solutions to smaller subproblems.
-    - Example: The Fibonacci sequence is built using smaller Fibonacci numbers $ F(n) = F(n-1) + F(n-2) $.
+   - The solution to a larger problem can be constructed from solutions to smaller subproblems.
+   - **Example**: The Fibonacci sequence is built using smaller Fibonacci numbers:  
+     \( F(n) = F(n-1) + F(n-2) \).
 
 2. **Overlapping Subproblems**
-    - The same subproblems are solved multiple times in a naive approach.
-    - Example: In a naive recursive Fibonacci implementation, $ F(4) $ is computed multiple times while solving $ F(6) $.
-
----
-
-### **Steps to Formulate a DP Solution**
-
-1. **Define the Problem State**
-    - Identify the variables that represent the problem's state at any given point.
-    - Example: In the **Knapsack Problem**, the state could be represented as $ dp[i][w] $, where $ i $ is the index of the current item, and $ w $ is the remaining capacity of the knapsack.
-
-2. **Define the Recurrence Relation**
-    - Establish how the solution to a problem depends on the solutions to its subproblems.
-    - Example: In the **Knapsack Problem**, the recurrence relation is:  
-      $$
-      dp[i][w] = \max(dp[i-1][w], dp[i-1][w-\text{weight}[i]] + \text{value}[i])
-      $$
-
-3. **Identify Base Cases**
-    - Determine the simplest scenarios where the solution is known without computation.
-    - Example: In the **Knapsack Problem**, $ dp[0][w] = 0 $, because no items can fit into the knapsack.
-
-4. **Iterate (Tabulation) or Recurse (Memoization)**
-    - Use the recurrence relation to compute the values of subproblems either iteratively or recursively, depending on the approach.
-
-5. **Extract the Final Answer**
-    - The final answer will typically be stored in a specific entry in the table or memoization structure.
-    - Example: In the **Knapsack Problem**, the solution is $ dp[n][W] $, where $ n $ is the total number of items, and $ W $ is the knapsack capacity.
+   - The same subproblems are solved multiple times in a naive approach.
+   - **Example**: In a naive recursive Fibonacci implementation, \( F(4) \) is computed multiple times while solving \( F(6) \).
 
 ---
 
 ### **Example Problem: 0/1 Knapsack Problem**
 
 #### Problem Statement:
-Given $ n $ items, each with a weight and value, determine the maximum value you can obtain by selecting a subset of the items, such that their total weight does not exceed $ W $ (the capacity of the knapsack). Each item can be included **at most once**.
+You are given \( n \) items, each with a **weight** and **value**. Your task is to determine the maximum total value you can obtain by selecting a subset of the items, such that the total weight does not exceed the knapsack's capacity \( W \). Each item can be included **at most once**.
+
+---
+
+### **Steps to Formulate a DP Solution**
+
+1. **Define the Problem State**
+   - Identify the variables that represent the problem's state at any given point.
+   - **Example**: In the **Knapsack Problem**, the state is represented as \( dp[i][w] \), where:
+      - \( i \): The index of the current item.
+      - \( w \): The remaining capacity of the knapsack.
+
+2. **Define the Recurrence Relation**
+   - Establish how the solution to a problem depends on solutions to its subproblems.
+   - **Example**: In the **Knapsack Problem**, the recurrence relation is:  
+     \[
+     dp[i][w] = \max(dp[i-1][w], dp[i-1][w-\text{weight}[i]] + \text{value}[i])
+     \]
+     This means that for each item, we decide whether to include it in the knapsack (if weight allows) or exclude it.
+
+3. **Identify Base Cases**
+   - Determine the simplest scenarios where the solution is known without computation.
+   - **Example**: In the **Knapsack Problem**, no items mean zero value:  
+     \( dp[0][w] = 0 \).
+
+4. **Iterate (Tabulation) or Recurse (Memoization)**
+   - Use the recurrence relation to compute subproblem values either iteratively or recursively.
+
+5. **Extract the Final Answer**
+   - The final answer is typically stored in a specific entry in the table or memoization structure.
+   - **Example**: For the **Knapsack Problem**, the solution is in \( dp[n][W] \), where \( n \) is the total number of items and \( W \) is the knapsack capacity.
 
 ---
 
 #### **Formulating the DP Solution**
 
-1. **State Representation**  
-   Let $ dp[i][w] $ represent the maximum value obtainable using the first $ i $ items with a knapsack capacity $ w $.
+1. **State Representation**
+   - Let \( dp[i][w] \) represent the **maximum value** obtainable using the first \( i \) items with a knapsack capacity \( w \).
 
 2. **Recurrence Relation**
-    - If we don't include the $ i $-th item: $ dp[i][w] = dp[i-1][w] $
-    - If we include the $ i $-th item (if its weight allows):  
-      $ dp[i][w] = dp[i-1][w-\text{weight}[i]] + \text{value}[i] $
-    - Combine the two cases:  
-      $$
-      dp[i][w] = \max(dp[i-1][w], dp[i-1][w-\text{weight}[i]] + \text{value}[i])
-      $$
+   - If the \( i \)-th item is not included:
+     \[
+     dp[i][w] = dp[i-1][w]
+     \]
+   - If the \( i \)-th item is included (and its weight fits in the knapsack):
+     \[
+     dp[i][w] = dp[i-1][w-\text{weight}[i]] + \text{value}[i]
+     \]
+   - Combine both cases:
+     \[
+     dp[i][w] = \max(dp[i-1][w], dp[i-1][w-\text{weight}[i]] + \text{value}[i])
+     \]
 
 3. **Base Cases**
-    - $ dp[0][w] = 0 $: No items means no value, regardless of $ w $.
-    - $ dp[i][0] = 0 $: A knapsack with capacity 0 cannot hold any items.
+   - \( dp[0][w] = 0 \): No items mean no value for any capacity.
+   - \( dp[i][0] = 0 \): A knapsack with zero capacity cannot hold any items.
 
-4. **Final Answer**  
-   The solution is stored in $ dp[n][W] $, where $ n $ is the total number of items and $ W $ is the knapsack capacity.
+4. **Final Answer**
+   - The solution is stored in \( dp[n][W] \).
 
 ---
 
-#### **Implementation**
+#### **Python Implementation**
 
-**Python Code:**
 ```python
 def knapsack(weights, values, W):
+    """
+    Solve the 0/1 Knapsack Problem.
+
+    Args:
+    weights (list): The weights of the items.
+    values (list): The values of the items.
+    W (int): The maximum weight capacity of the knapsack.
+
+    Returns:
+    int: The maximum value obtainable.
+    """
     n = len(weights)
+    
+    # Initialize DP table
     dp = [[0] * (W + 1) for _ in range(n + 1)]
 
+    # Populate the DP table
     for i in range(1, n + 1):
         for w in range(W + 1):
             if weights[i - 1] <= w:
+                # Include the item or exclude it
                 dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1])
             else:
+                # Exclude the item
                 dp[i][w] = dp[i - 1][w]
 
     return dp[n][W]
 
 # Example usage
-weights = [1, 2, 3]
-values = [6, 10, 12]
-W = 5
+weights = [1, 2, 3]  # Weights of items
+values = [6, 10, 12]  # Values of items
+W = 5  # Knapsack capacity
 print(knapsack(weights, values, W))  # Output: 22
 ```
 
-**Java Code:**
+---
+
+#### **Explanation of Example**
+
+1. **Input**:
+   - **Weights**: [1, 2, 3] (weights of the items).
+   - **Values**: [6, 10, 12] (values of the items).
+   - **Capacity**: \( W = 5 \).
+
+2. **Process**:
+   - Use dynamic programming to calculate the maximum value for each subproblem.
+   - For capacity \( W = 5 \), including items 2 and 3 yields a total value of 22.
+
+3. **Output**:
+   - The maximum value obtainable is **22**.
+
+---
+
+#### **Java Implementation**
+
 ```java
 public class Knapsack {
     public static int knapsack(int[] weights, int[] values, int W) {
         int n = weights.length;
+
+        // Initialize DP table
         int[][] dp = new int[n + 1][W + 1];
 
+        // Populate DP table
         for (int i = 1; i <= n; i++) {
             for (int w = 0; w <= W; w++) {
                 if (weights[i - 1] <= w) {
+                    // Include the item or exclude it
                     dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]);
                 } else {
+                    // Exclude the item
                     dp[i][w] = dp[i - 1][w];
                 }
             }
@@ -124,15 +173,13 @@ public class Knapsack {
     }
 
     public static void main(String[] args) {
-        int[] weights = {1, 2, 3};
-        int[] values = {6, 10, 12};
-        int W = 5;
+        int[] weights = {1, 2, 3}; // Weights of items
+        int[] values = {6, 10, 12}; // Values of items
+        int W = 5; // Knapsack capacity
         System.out.println(knapsack(weights, values, W)); // Output: 22
     }
 }
 ```
-
----
 
 ### **Optimized Space Complexity**
 
