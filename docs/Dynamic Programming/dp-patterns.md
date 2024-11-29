@@ -16,18 +16,18 @@ Dynamic Programming is applicable when a problem exhibits the following characte
 1. **Optimal Substructure**
    - The solution to a larger problem can be constructed from solutions to smaller subproblems.
    - **Example**: The Fibonacci sequence is built using smaller Fibonacci numbers:  
-     \( F(n) = F(n-1) + F(n-2) \).
+     $ F(n) = F(n-1) + F(n-2) $.
 
 2. **Overlapping Subproblems**
    - The same subproblems are solved multiple times in a naive approach.
-   - **Example**: In a naive recursive Fibonacci implementation, \( F(4) \) is computed multiple times while solving \( F(6) \).
+   - **Example**: In a naive recursive Fibonacci implementation, $ F(4) $ is computed multiple times while solving $ F(6) $.
 
 ---
 
 ### **Example Problem: 0/1 Knapsack Problem**
 
 #### Problem Statement:
-You are given \( n \) items, each with a **weight** and **value**. Your task is to determine the maximum total value you can obtain by selecting a subset of the items, such that the total weight does not exceed the knapsack's capacity \( W \). Each item can be included **at most once**.
+You are given $ n $ items, each with a **weight** and **value**. Your task is to determine the maximum total value you can obtain by selecting a subset of the items, such that the total weight does not exceed the knapsack's capacity $ W $. Each item can be included **at most once**.
 
 ---
 
@@ -35,57 +35,57 @@ You are given \( n \) items, each with a **weight** and **value**. Your task is 
 
 1. **Define the Problem State**
    - Identify the variables that represent the problem's state at any given point.
-   - **Example**: In the **Knapsack Problem**, the state is represented as \( dp[i][w] \), where:
-      - \( i \): The index of the current item.
-      - \( w \): The remaining capacity of the knapsack.
+   - **Example**: In the **Knapsack Problem**, the state is represented as $ dp[i][w] $, where:
+      - $ i $: The index of the current item.
+      - $ w $: The remaining capacity of the knapsack.
 
 2. **Define the Recurrence Relation**
    - Establish how the solution to a problem depends on solutions to its subproblems.
    - **Example**: In the **Knapsack Problem**, the recurrence relation is:  
-     \[
+     $$
      dp[i][w] = \max(dp[i-1][w], dp[i-1][w-\text{weight}[i]] + \text{value}[i])
-     \]
+     $$
      This means that for each item, we decide whether to include it in the knapsack (if weight allows) or exclude it.
 
 3. **Identify Base Cases**
    - Determine the simplest scenarios where the solution is known without computation.
    - **Example**: In the **Knapsack Problem**, no items mean zero value:  
-     \( dp[0][w] = 0 \).
+     $ dp[0][w] = 0 $.
 
 4. **Iterate (Tabulation) or Recurse (Memoization)**
    - Use the recurrence relation to compute subproblem values either iteratively or recursively.
 
 5. **Extract the Final Answer**
    - The final answer is typically stored in a specific entry in the table or memoization structure.
-   - **Example**: For the **Knapsack Problem**, the solution is in \( dp[n][W] \), where \( n \) is the total number of items and \( W \) is the knapsack capacity.
+   - **Example**: For the **Knapsack Problem**, the solution is in $ dp[n][W] $, where $ n $ is the total number of items and $ W $ is the knapsack capacity.
 
 ---
 
 #### **Formulating the DP Solution**
 
 1. **State Representation**
-   - Let \( dp[i][w] \) represent the **maximum value** obtainable using the first \( i \) items with a knapsack capacity \( w \).
+   - Let $ dp[i][w] $ represent the **maximum value** obtainable using the first $ i $ items with a knapsack capacity $ w $.
 
 2. **Recurrence Relation**
-   - If the \( i \)-th item is not included:
-     \[
+   - If the $ i $-th item is not included:
+     $$
      dp[i][w] = dp[i-1][w]
-     \]
-   - If the \( i \)-th item is included (and its weight fits in the knapsack):
-     \[
+     $$
+   - If the $ i $-th item is included (and its weight fits in the knapsack):
+     $$
      dp[i][w] = dp[i-1][w-\text{weight}[i]] + \text{value}[i]
-     \]
+     $$
    - Combine both cases:
-     \[
+     $$
      dp[i][w] = \max(dp[i-1][w], dp[i-1][w-\text{weight}[i]] + \text{value}[i])
-     \]
+     $$
 
 3. **Base Cases**
-   - \( dp[0][w] = 0 \): No items mean no value for any capacity.
-   - \( dp[i][0] = 0 \): A knapsack with zero capacity cannot hold any items.
+   - $ dp[0][w] = 0 $: No items mean no value for any capacity.
+   - $ dp[i][0] = 0 $: A knapsack with zero capacity cannot hold any items.
 
 4. **Final Answer**
-   - The solution is stored in \( dp[n][W] \).
+   - The solution is stored in $ dp[n][W] $.
 
 ---
 
@@ -135,11 +135,11 @@ print(knapsack(weights, values, W))  # Output: 22
 1. **Input**:
    - **Weights**: [1, 2, 3] (weights of the items).
    - **Values**: [6, 10, 12] (values of the items).
-   - **Capacity**: \( W = 5 \).
+   - **Capacity**: $ W = 5 $.
 
 2. **Process**:
    - Use dynamic programming to calculate the maximum value for each subproblem.
-   - For capacity \( W = 5 \), including items 2 and 3 yields a total value of 22.
+   - For capacity $ W = 5 $, including items 2 and 3 yields a total value of 22.
 
 3. **Output**:
    - The maximum value obtainable is **22**.
