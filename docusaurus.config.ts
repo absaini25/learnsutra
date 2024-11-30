@@ -145,7 +145,8 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['java']
+      additionalLanguages: ['java'],
+      showLineNumbers: true
     },
   } satisfies Preset.ThemeConfig,
     stylesheets: [
