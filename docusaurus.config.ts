@@ -70,6 +70,23 @@ const config: Config = {
     ],
   ],
 
+  // Adding the database directory as a docs plugin
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'database', // Unique ID for the database docs instance
+        path: 'database', // Path to the database directory
+        routeBasePath: 'database', // The URL route for the database section
+        sidebarPath: require.resolve('./sidebars.js'), // Optional: Define a sidebar for this section
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/absaini25/learnsutra/edit/main/database/', // Add the edit URL for /database section
+
+      },
+    ],
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -84,8 +101,9 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'DSA',
+          label: 'Data Structures and Algorithms',
         },
+        {to: '/database', label: 'Databases', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/absaini25/learnsutra',
@@ -149,15 +167,16 @@ const config: Config = {
       showLineNumbers: true
     },
   } satisfies Preset.ThemeConfig,
-    stylesheets: [
-      {
-        href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
-        type: 'text/css',
-        integrity:
-          'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
-        crossorigin: 'anonymous',
-      },
-    ],
+
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
 };
 
 export default config;
