@@ -85,7 +85,7 @@ const config: Config = {
         sidebarPath: require.resolve('./sidebars.js'), // Optional: Define a sidebar for this section
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
-        editUrl: 'https://github.com/absaini25/learnsutra/edit/main/database/', // Add the edit URL for /database section
+        editUrl: 'https://github.com/absaini25/learnsutra/edit/main/', // Add the edit URL for /database section
 
       },
     ],
