@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-database docs-version-current docs-doc-page docs-doc-id-Indexes/types-of-index-implementation" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">types-of-index-implementation | LearnSutra</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://learnsutra.org/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://learnsutra.org/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://learnsutra.org/database/Indexes/types-of-index-implementation"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-database-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-database-current"><meta data-rh="true" property="og:title" content="types-of-index-implementation | LearnSutra"><meta data-rh="true" name="description" content="Exploring Different Types of Database Index Implementations"><meta data-rh="true" property="og:description" content="Exploring Different Types of Database Index Implementations"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://learnsutra.org/database/Indexes/types-of-index-implementation"><link data-rh="true" rel="alternate" href="https://learnsutra.org/database/Indexes/types-of-index-implementation" hreflang="en"><link data-rh="true" rel="alternate" href="https://learnsutra.org/database/Indexes/types-of-index-implementation" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="LearnSutra RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="LearnSutra Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NMJ0TY5VK3"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-NMJ0TY5VK3",{anonymize_ip:!0})</script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.26d94ab5.css">
+<script src="/assets/js/runtime~main.64fb8f27.js" defer="defer"></script>
+<script src="/assets/js/main.b07e2faf.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">LearnSutra.org</b></a><a class="navbar__item navbar__link" href="/docs/intro">Data Structures and Algorithms</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/database">Databases</a><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/absaini25/learnsutra" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/database/Basics/types-of-indexes">Basics</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/database/Indexes/types-of-index-implementation">Indexes</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/database/Indexes/types-of-index-implementation">types-of-index-implementation</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/database/">Learning content around databases</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Indexes</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">types-of-index-implementation</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>types-of-index-implementation</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="exploring-different-types-of-database-index-implementations">Exploring Different Types of Database Index Implementations<a href="#exploring-different-types-of-database-index-implementations" class="hash-link" aria-label="Direct link to Exploring Different Types of Database Index Implementations" title="Direct link to Exploring Different Types of Database Index Implementations">​</a></h2>
+<p>Efficient database indexing is a cornerstone of high-performance systems. Indexes accelerate query performance, enabling quick data lookups without scanning entire datasets. Depending on the use case, database systems implement various index structures, each optimized for specific scenarios.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-b-tree-index"><strong>1. B-Tree Index</strong><a href="#1-b-tree-index" class="hash-link" aria-label="Direct link to 1-b-tree-index" title="Direct link to 1-b-tree-index">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: B-Trees are balanced search trees that store data in sorted order, making them ideal for range queries and point lookups.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Balanced structure ensures logarithmic search time.</li>
+<li>Nodes contain multiple keys and pointers, reducing I/O operations.</li>
+<li>Supports ordered traversal for range queries.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>Relational databases like MySQL, PostgreSQL (default index type).</li>
+<li>Use cases with frequent updates and range queries.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Diagram</strong>:</p>
+<!-- -->
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-hash-index"><strong>2. Hash Index</strong><a href="#2-hash-index" class="hash-link" aria-label="Direct link to 2-hash-index" title="Direct link to 2-hash-index">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: Uses hash functions to map keys to buckets, ensuring O(1) average-time complexity for point lookups.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Excellent for equality comparisons (<code>=</code> operator).</li>
+<li>Does not support range queries.</li>
+<li>Collisions managed via techniques like chaining or open addressing.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>Applications requiring fast key-value lookups (e.g., caching layers).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-bitmap-index"><strong>3. Bitmap Index</strong><a href="#3-bitmap-index" class="hash-link" aria-label="Direct link to 3-bitmap-index" title="Direct link to 3-bitmap-index">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: Represents data using bitmaps, where each bit indicates the presence or absence of a value.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Space-efficient for low-cardinality data (e.g., gender, status flags).</li>
+<li>Ideal for analytical workloads with complex AND/OR/NOT queries.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>Data warehouses, OLAP systems (e.g., Apache Hive, ClickHouse).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-gist-generalized-search-tree"><strong>4. GiST (Generalized Search Tree)</strong><a href="#4-gist-generalized-search-tree" class="hash-link" aria-label="Direct link to 4-gist-generalized-search-tree" title="Direct link to 4-gist-generalized-search-tree">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: A flexible index structure supporting various types of queries, including spatial and full-text searches.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Extensible design for custom data types and operators.</li>
+<li>Handles multi-dimensional data (e.g., geographic coordinates).</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>PostgreSQL for indexing spatial (PostGIS) and full-text data.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5-r-tree-index"><strong>5. R-Tree Index</strong><a href="#5-r-tree-index" class="hash-link" aria-label="Direct link to 5-r-tree-index" title="Direct link to 5-r-tree-index">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: Specialized for spatial data, R-Trees organize objects into nested, hierarchically-arranged bounding rectangles.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Efficient range and nearest-neighbor queries.</li>
+<li>Optimized for spatial overlap searches.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>GIS systems, location-based services.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Diagram</strong>:</p>
+<!-- -->
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="6-lsm-tree-log-structured-merge-tree"><strong>6. LSM Tree (Log-Structured Merge Tree)</strong><a href="#6-lsm-tree-log-structured-merge-tree" class="hash-link" aria-label="Direct link to 6-lsm-tree-log-structured-merge-tree" title="Direct link to 6-lsm-tree-log-structured-merge-tree">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: Optimized for high-throughput writes by buffering data in memory and merging it into sorted files on disk.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Append-only write operations minimize disk I/O.</li>
+<li>Background compaction reduces storage fragmentation.</li>
+<li>Suitable for scenarios with high write throughput.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>NoSQL databases (e.g., Cassandra, RocksDB, LevelDB).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="7-inverted-index"><strong>7. Inverted Index</strong><a href="#7-inverted-index" class="hash-link" aria-label="Direct link to 7-inverted-index" title="Direct link to 7-inverted-index">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: A mapping from content (e.g., words) to their locations in a dataset, enabling full-text search.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Fast text-based lookups and keyword matching.</li>
+<li>Often paired with ranking algorithms for relevance.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>Search engines, full-text search in Elasticsearch, Apache Solr.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Diagram</strong>:</p>
+<!-- -->
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8-trie-prefix-tree"><strong>8. Trie (Prefix Tree)</strong><a href="#8-trie-prefix-tree" class="hash-link" aria-label="Direct link to 8-trie-prefix-tree" title="Direct link to 8-trie-prefix-tree">​</a></h3>
+<ul>
+<li><strong>Overview</strong>: A tree-based structure for efficient string storage and retrieval, with keys represented as paths from the root.</li>
+<li><strong>Key Features</strong>:<!-- -->
+<ul>
+<li>Efficient for prefix and exact match queries.</li>
+<li>Memory-intensive compared to other structures.</li>
+</ul>
+</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li>Auto-completion systems, DNS resolution.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion"><strong>Conclusion</strong><a href="#conclusion" class="hash-link" aria-label="Direct link to conclusion" title="Direct link to conclusion">​</a></h3>
+<p>Each indexing technique balances trade-offs between read/write performance, storage overhead, and query capabilities. Selecting the right index type depends on the access patterns, data cardinality, and application requirements.</p>
+<hr>
+<p>Let me know when you&#x27;re ready to dive deep into <strong>B-Trees (Post 2)</strong> or <strong>LSM Trees (Post 3)</strong>!</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/absaini25/learnsutra/edit/main/database/Indexes/types-of-index-implementation.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/database/Basics/types-of-indexes"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Types of Database Indexes</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/database/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Learning content around databases</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#exploring-different-types-of-database-index-implementations" class="table-of-contents__link toc-highlight">Exploring Different Types of Database Index Implementations</a><ul><li><a href="#1-b-tree-index" class="table-of-contents__link toc-highlight"><strong>1. B-Tree Index</strong></a></li><li><a href="#2-hash-index" class="table-of-contents__link toc-highlight"><strong>2. Hash Index</strong></a></li><li><a href="#3-bitmap-index" class="table-of-contents__link toc-highlight"><strong>3. Bitmap Index</strong></a></li><li><a href="#4-gist-generalized-search-tree" class="table-of-contents__link toc-highlight"><strong>4. GiST (Generalized Search Tree)</strong></a></li><li><a href="#5-r-tree-index" class="table-of-contents__link toc-highlight"><strong>5. R-Tree Index</strong></a></li><li><a href="#6-lsm-tree-log-structured-merge-tree" class="table-of-contents__link toc-highlight"><strong>6. LSM Tree (Log-Structured Merge Tree)</strong></a></li><li><a href="#7-inverted-index" class="table-of-contents__link toc-highlight"><strong>7. Inverted Index</strong></a></li><li><a href="#8-trie-prefix-tree" class="table-of-contents__link toc-highlight"><strong>8. Trie (Prefix Tree)</strong></a></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight"><strong>Conclusion</strong></a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Tutorial</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://x.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">X<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/absaini25/learnsutra" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 LearnSutra.org, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
