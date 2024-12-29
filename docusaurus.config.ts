@@ -74,6 +74,12 @@ const config: Config = {
     ],
   ],
 
+  markdown: {
+    mermaid: true,
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
+
   // Adding the database directory as a docs plugin
   plugins: [
     [
