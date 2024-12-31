@@ -14,7 +14,7 @@ for letter in s:
 
 - A character can be converted to and integer by `ord('a')`. It can be converted back to character by using
   `chr()`. <br> **Example:** `letter = chr(ord('a') + 2)`. In this the `letter` would be 'c' `
-- A list can be reversed in python via `reversed(list)` method. Array slicing (in later section) is another way to do
+- A list can be reversed in python via `reversed(list)` method (but it needs to be converted back to list via `list()` if needed for more than iteration. Array slicing (in later section) is another way to do
   that.
 
 ## Conditions
@@ -146,9 +146,46 @@ print(my_list)
 
 ```
 
--
 
 ## Queue
+
+### **`deque` (Double-Ended Queue) in Python**
+
+A `deque` is a **double-ended queue** provided by the `collections` module in Python. It allows fast appends and pops from both ends of the queue, which makes it ideal for use cases that require efficient queue operations.
+
+### **Common Methods in `deque`:**
+
+| **Method**                  | **Description**                                                                                           | **Example**                              |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------|
+| `append(x)`                 | Adds an element `x` to the right side of the deque.                                                      | `d.append(1)`                            |
+| `appendleft(x)`             | Adds an element `x` to the left side of the deque.                                                       | `d.appendleft(2)`                        |
+| `pop()`                     | Removes and returns an element from the right side of the deque.                                          | `d.pop()`                               |
+| `popleft()`                 | Removes and returns an element from the left side of the deque.                                           | `d.popleft()`                           |
+| `extend(iterable)`          | Adds all elements of an iterable to the right side of the deque.                                           | `d.extend([3, 4, 5])`                   |
+| `extendleft(iterable)`      | Adds all elements of an iterable to the left side of the deque (in reverse order).                       | `d.extendleft([1, 2])`                  |
+| `rotate(n)`                 | Rotates the deque `n` steps to the right. If `n` is negative, rotates left.                               | `d.rotate(1)`                            |
+
+### **Example Initialisation:**
+
+```python
+from collections import deque
+
+# Create an empty deque
+d = deque()
+
+# Create q with some elements. Note that it only takes in a list type in the constructor.
+d = deque([1, 2, 3])
+# Create q with even numbers.
+d = deque(x for x in range(n) if x % 2 = 0)
+
+```
+
+### **Advantages over List**:
+- **Efficiency**: `deque` operations for adding/removing elements from both ends are faster compared to lists.
+- **No Shifting**: Unlike lists, where elements might need to be shifted when performing operations like `pop(0)`, `deque` does not have this overhead.
+
+### **Disadvantages**:
+- **Access by Index**: `deque` does not support efficient access by index (`O(n)`), whereas lists provide `O(1)` time for indexing. Therefore, `deque` is best suited for operations where elements are added/removed from ends.
 
 ## Priority Queue
 
