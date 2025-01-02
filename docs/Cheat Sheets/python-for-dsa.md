@@ -2,20 +2,154 @@
 
 ## General
 
-### Characters
+### Defining classes and methods
 
-- A character in a string can be checked for being a digit via:
+---
+
+#### **Defining a Class**
+
+A class is defined using the `class` keyword:
 
 ```python
-for letter in s:
-    if letter.isdigit():
-# Do something
+class MyClass:
+    # Class Attribute (shared by all instances)
+    class_attribute = "Shared value"
+
+    # Constructor (Initializer)
+    def __init__(self, attribute1, attribute2="default"):
+        self.attribute1 = attribute1  # Instance attribute
+        self.attribute2 = attribute2  # Instance attribute
+
+    # Instance Method
+    def instance_method(self):
+        return f"Attribute1 is {self.attribute1}"
+
+    # Class Method
+    @classmethod
+    def class_method(cls):
+        return f"Class Attribute is {cls.class_attribute}"
+
+    # Static Method
+    @staticmethod
+    def static_method():
+        return "Static methods are not tied to class or instance."
 ```
 
-- A character can be converted to and integer by `ord('a')`. It can be converted back to character by using
-  `chr()`. <br> **Example:** `letter = chr(ord('a') + 2)`. In this the `letter` would be 'c' `
-- A list can be reversed in python via `reversed(list)` method (but it needs to be converted back to list via `list()` if needed for more than iteration. Array slicing (in later section) is another way to do
-  that.
+---
+
+#### **Constructor: `__init__`**
+
+The `__init__` method is called automatically when a new object is created. It initializes instance attributes.
+
+##### **Avoid Mutable Default Arguments**
+
+Default arguments in constructors should **not** be mutable (e.g., lists, dictionaries). This is because mutable objects
+are shared across instances, which can lead to unexpected behavior.
+
+Example of incorrect usage:
+
+```python
+class Example:
+    def __init__(self, data=[]):  # Avoid mutable default arguments
+        self.data = data
+```
+
+Correct usage:
+
+```python
+class Example:
+    def __init__(self, data=None):
+        self.data = data if data is not None else []
+```
+
+---
+
+#### **Defining Methods**
+
+1. **Instance Methods**  
+   Operate on an instance of the class. Access instance attributes using `self`.
+
+   Example:
+   ```python
+   def greet(self, name):
+       return f"Hello, {name}! This is {self.attribute1}"
+   ```
+
+2. **Class Methods**  
+   Operate on the class itself, not specific instances. Use `@classmethod` decorator and `cls` as the first parameter.
+
+   Example:
+   ```python
+   @classmethod
+   def change_class_attribute(cls, value):
+       cls.class_attribute = value
+   ```
+
+3. **Static Methods**  
+   Do not access class or instance data. Use `@staticmethod`.
+
+   Example:
+   ```python
+   @staticmethod
+   def utility_function():
+       return "This is a utility function."
+   ```
+
+---
+
+#### **Nested Classes and Methods**
+
+Nested classes and methods help organize code, particularly when certain logic is only relevant within a specific
+context.
+
+##### **Nested Classes**
+
+```python
+class OuterClass:
+    class InnerClass:
+        def inner_method(self):
+            return "Inner method in InnerClass"
+```
+
+##### **Nested Methods**
+
+Methods can call helper functions defined within them:
+
+```python
+class MyClass:
+    def complex_method(self):
+        def helper_function(value):
+            return value * 2
+
+        result = helper_function(10)
+        return f"Result is {result}"
+```
+
+---
+
+#### **Instantiating and Using a Class**
+
+```python
+# Creating an instance
+obj = MyClass("Value1", attribute2="Value2")
+
+# Accessing attributes and methods
+print(obj.instance_method())  # "Attribute1 is Value1"
+print(MyClass.class_method())  # "Class Attribute is Shared value"
+print(MyClass.static_method())  # "Static methods are not tied to class or instance."
+```
+
+---
+
+#### **Key Takeaways**
+
+1. Define classes using `class` keyword.
+2. Use `__init__` to initialize instance attributes.
+3. Avoid mutable default arguments in constructors.
+4. Use instance, class, and static methods appropriately.
+5. Nest classes or methods for encapsulating related logic.
+
+---
 
 ## Conditions
 
@@ -67,59 +201,80 @@ print(zipped)  # Output: [(1, 'a'), (2, 'b')]
 
 ## String
 
-| **Method**            | **Description**                                                                                              | **Example**                                                   | **Output**                          |
-|------------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|-------------------------------------|
-| `str.lower()`          | Converts all characters to lowercase.                                                                    | `"Hello".lower()`                                            | `'hello'`                           |
-| `str.upper()`          | Converts all characters to uppercase.                                                                    | `"Hello".upper()`                                            | `'HELLO'`                           |
-| `str.strip([chars])`   | Removes leading and trailing characters (default: whitespace).                                           | `"  hello  ".strip()`                                        | `'hello'`                           |
-| `str.find(sub)`        | Returns the index of the first occurrence of `sub`, or `-1` if not found.                                | `"hello".find("e")`                                          | `1`                                 |
-| `str.index(sub)`       | Like `find()`, but raises `ValueError` if `sub` is not found.                                             | `"hello".index("e")`                                         | `1`                                 |
-| `str.count(sub)`       | Counts the occurrences of `sub` in the string.                                                           | `"hello".count("l")`                                         | `2`                                 |
-| `str.replace(old, new)`| Replaces all occurrences of `old` with `new`.                                                            | `"hello".replace("l", "p")`                                  | `'heppo'`                           |
-| `str.split([sep])`     | Splits the string into a list using `sep` (default: whitespace).                                          | `"a,b,c".split(",")`                                         | `['a', 'b', 'c']`                   |
-| `str.join(iterable)`   | Joins elements of an iterable with the string as a separator.                                            | `" ".join(["hello", "world"])`                               | `'hello world'`                     |
-| `str.startswith(prefix)`| Returns `True` if the string starts with the specified prefix.                                           | `"hello".startswith("he")`                                   | `True`                              |
-| `str.endswith(suffix)` | Returns `True` if the string ends with the specified suffix.                                             | `"hello".endswith("lo")`                                     | `True`                              |
-| `str.isdigit()`        | Returns `True` if all characters are digits.                                                             | `"123".isdigit()`                                            | `True`                              |
-| `str.isalpha()`        | Returns `True` if all characters are alphabetic.                                                         | `"abc".isalpha()`                                            | `True`                              |
-| `str.isalnum()`        | Returns `True` if all characters are alphanumeric.                                                       | `"abc123".isalnum()`                                         | `True`                              |
-| `str.partition(sep)`   | Splits the string into a 3-tuple: before `sep`, `sep`, and after `sep`.                                   | `"key=value".partition("=")`                                 | `('key', '=', 'value')`             |
+| **Method**               | **Description**                                                           | **Example**                    | **Output**              |
+|--------------------------|---------------------------------------------------------------------------|--------------------------------|-------------------------|
+| `str.lower()`            | Converts all characters to lowercase.                                     | `"Hello".lower()`              | `'hello'`               |
+| `str.upper()`            | Converts all characters to uppercase.                                     | `"Hello".upper()`              | `'HELLO'`               |
+| `str.strip([chars])`     | Removes leading and trailing characters (default: whitespace).            | `"  hello  ".strip()`          | `'hello'`               |
+| `str.find(sub)`          | Returns the index of the first occurrence of `sub`, or `-1` if not found. | `"hello".find("e")`            | `1`                     |
+| `str.index(sub)`         | Like `find()`, but raises `ValueError` if `sub` is not found.             | `"hello".index("e")`           | `1`                     |
+| `str.count(sub)`         | Counts the occurrences of `sub` in the string.                            | `"hello".count("l")`           | `2`                     |
+| `str.replace(old, new)`  | Replaces all occurrences of `old` with `new`.                             | `"hello".replace("l", "p")`    | `'heppo'`               |
+| `str.split([sep])`       | Splits the string into a list using `sep` (default: whitespace).          | `"a,b,c".split(",")`           | `['a', 'b', 'c']`       |
+| `str.join(iterable)`     | Joins elements of an iterable with the string as a separator.             | `" ".join(["hello", "world"])` | `'hello world'`         |
+| `str.startswith(prefix)` | Returns `True` if the string starts with the specified prefix.            | `"hello".startswith("he")`     | `True`                  |
+| `str.endswith(suffix)`   | Returns `True` if the string ends with the specified suffix.              | `"hello".endswith("lo")`       | `True`                  |
+| `str.isdigit()`          | Returns `True` if all characters are digits.                              | `"123".isdigit()`              | `True`                  |
+| `str.isalpha()`          | Returns `True` if all characters are alphabetic.                          | `"abc".isalpha()`              | `True`                  |
+| `str.isalnum()`          | Returns `True` if all characters are alphanumeric.                        | `"abc123".isalnum()`           | `True`                  |
+| `str.partition(sep)`     | Splits the string into a 3-tuple: before `sep`, `sep`, and after `sep`.   | `"key=value".partition("=")`   | `('key', '=', 'value')` |
 
 Some string methods in Python allow specifying indices or ranges to narrow down their operation.
 
-| **Method**                 | **Description**                                                                                              | **Example**                                                                | **Output**   |
-|-----------------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|--------------|
-| `str.startswith(prefix, start, end)` | Checks if the string starts with `prefix` within the range `[start:end]`.                              | `"hello".startswith("e", 1, 4)`                                           | `True`       |
-| `str.endswith(suffix, start, end)`   | Checks if the string ends with `suffix` within the range `[start:end]`.                                | `"hello".endswith("l", 0, 3)`                                             | `True`       |
-| `str.find(sub, start, end)`          | Returns the lowest index of `sub` within the range `[start:end]`, or `-1` if not found.                | `"hello".find("l", 3, 5)`                                                 | `3`          |
-| `str.index(sub, start, end)`         | Like `find()`, but raises a `ValueError` if `sub` is not found within the range `[start:end]`.         | `"hello".index("l", 3, 5)`                                                | `3`          |
-| `str.count(sub, start, end)`         | Counts occurrences of `sub` within the range `[start:end]`.                                            | `"hello".count("l", 0, 4)`                                                | `2`          |
+| **Method**                           | **Description**                                                                                | **Example**                     | **Output** |
+|--------------------------------------|------------------------------------------------------------------------------------------------|---------------------------------|------------|
+| `str.startswith(prefix, start, end)` | Checks if the string starts with `prefix` within the range `[start:end]`.                      | `"hello".startswith("e", 1, 4)` | `True`     |
+| `str.endswith(suffix, start, end)`   | Checks if the string ends with `suffix` within the range `[start:end]`.                        | `"hello".endswith("l", 0, 3)`   | `True`     |
+| `str.find(sub, start, end)`          | Returns the lowest index of `sub` within the range `[start:end]`, or `-1` if not found.        | `"hello".find("l", 3, 5)`       | `3`        |
+| `str.index(sub, start, end)`         | Like `find()`, but raises a `ValueError` if `sub` is not found within the range `[start:end]`. | `"hello".index("l", 3, 5)`      | `3`        |
+| `str.count(sub, start, end)`         | Counts occurrences of `sub` within the range `[start:end]`.                                    | `"hello".count("l", 0, 4)`      | `2`        |
 
-### Notes:
+#### Notes:
+
 - **Indices**: Both `start` and `end` are optional. If omitted, the method considers the entire string.
 - **Ranges**: The `end` index is exclusive, meaning the range considered is `[start, end)`.
 
-### Example Code
+#### Example Code
+
 ```python
 text = "hello world"
-print(text.startswith("lo", 3))          # True: "lo" starts at index 3
-print(text.endswith("lo", 0, 5))         # True: "lo" is in range [0, 5)
-print(text.find("o", 5))                 # 7: "o" first appears at index 7 starting from index 5
-print(text.count("l", 2, 8))             # 2: "l" appears twice in range [2, 8)
+print(text.startswith("lo", 3))  # True: "lo" starts at index 3
+print(text.endswith("lo", 0, 5))  # True: "lo" is in range [0, 5)
+print(text.find("o", 5))  # 7: "o" first appears at index 7 starting from index 5
+print(text.count("l", 2, 8))  # 2: "l" appears twice in range [2, 8)
 ``` 
 
-These are especially useful for **substring checks** and **search operations** constrained to specific parts of a string.
+These are especially useful for **substring checks** and **search operations** constrained to specific parts of a
+string.
+
+---
+
+### Characters
+
+- A character in a string can be checked for being a digit via:
+
+```python
+for letter in s:
+    if letter.isdigit():
+# Do something
+```
+
+- A character can be converted to and integer by `ord('a')`. It can be converted back to character by using
+  `chr()`. <br/> **Example:** `letter = chr(ord('a') + 2)`. In this the `letter` would be 'c' `
+- A list can be reversed in python via `reversed(list)` method (but it needs to be converted back to list via `list()`
+  if needed for more than iteration. Array slicing (in later section) is another way to do
+  that.
 
 ## Loops
 
 ## Math
 
-- Use `pow()` to calculate powers. <br> **Example:** $ 2^8 $ can be calculated by `pow(2,8)`.
+- Use `pow()` to calculate powers. <br/> **Example:** $ 2^8 $ can be calculated by `pow(2,8)`.
 - `math.inf` and `-math.inf` can be used when large negative or positive numbers are needed for initialisation.
 - `max()` and `min()` can be used to find the maximum and minimum of the elements. Works both with individual items like
   `max(item1, item2)` or over list like `max(list)`
 - `sum()` can be used to calculate sum of the input arguments (list or elements).
-- To find a **random number** we can use: <br>
+- To find a **random number** we can use: <br/>
 
 ```python
 import random
@@ -146,24 +301,24 @@ print(my_list)
 
 ```
 
-
 ## Queue
 
 ### **`deque` (Double-Ended Queue) in Python**
 
-A `deque` is a **double-ended queue** provided by the `collections` module in Python. It allows fast appends and pops from both ends of the queue, which makes it ideal for use cases that require efficient queue operations.
+A `deque` is a **double-ended queue** provided by the `collections` module in Python. It allows fast appends and pops
+from both ends of the queue, which makes it ideal for use cases that require efficient queue operations.
 
 ### **Common Methods in `deque`:**
 
-| **Method**                  | **Description**                                                                                           | **Example**                              |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------|
-| `append(x)`                 | Adds an element `x` to the right side of the deque.                                                      | `d.append(1)`                            |
-| `appendleft(x)`             | Adds an element `x` to the left side of the deque.                                                       | `d.appendleft(2)`                        |
-| `pop()`                     | Removes and returns an element from the right side of the deque.                                          | `d.pop()`                               |
-| `popleft()`                 | Removes and returns an element from the left side of the deque.                                           | `d.popleft()`                           |
-| `extend(iterable)`          | Adds all elements of an iterable to the right side of the deque.                                           | `d.extend([3, 4, 5])`                   |
-| `extendleft(iterable)`      | Adds all elements of an iterable to the left side of the deque (in reverse order).                       | `d.extendleft([1, 2])`                  |
-| `rotate(n)`                 | Rotates the deque `n` steps to the right. If `n` is negative, rotates left.                               | `d.rotate(1)`                            |
+| **Method**             | **Description**                                                                    | **Example**            |
+|------------------------|------------------------------------------------------------------------------------|------------------------|
+| `append(x)`            | Adds an element `x` to the right side of the deque.                                | `d.append(1)`          |
+| `appendleft(x)`        | Adds an element `x` to the left side of the deque.                                 | `d.appendleft(2)`      |
+| `pop()`                | Removes and returns an element from the right side of the deque.                   | `d.pop()`              |
+| `popleft()`            | Removes and returns an element from the left side of the deque.                    | `d.popleft()`          |
+| `extend(iterable)`     | Adds all elements of an iterable to the right side of the deque.                   | `d.extend([3, 4, 5])`  |
+| `extendleft(iterable)` | Adds all elements of an iterable to the left side of the deque (in reverse order). | `d.extendleft([1, 2])` |
+| `rotate(n)`            | Rotates the deque `n` steps to the right. If `n` is negative, rotates left.        | `d.rotate(1)`          |
 
 ### **Example Initialisation:**
 
@@ -181,11 +336,15 @@ d = deque(x for x in range(n) if x % 2 = 0)
 ```
 
 ### **Advantages over List**:
+
 - **Efficiency**: `deque` operations for adding/removing elements from both ends are faster compared to lists.
-- **No Shifting**: Unlike lists, where elements might need to be shifted when performing operations like `pop(0)`, `deque` does not have this overhead.
+- **No Shifting**: Unlike lists, where elements might need to be shifted when performing operations like `pop(0)`,
+  `deque` does not have this overhead.
 
 ### **Disadvantages**:
-- **Access by Index**: `deque` does not support efficient access by index (`O(n)`), whereas lists provide `O(1)` time for indexing. Therefore, `deque` is best suited for operations where elements are added/removed from ends.
+
+- **Access by Index**: `deque` does not support efficient access by index (`O(n)`), whereas lists provide `O(1)` time
+  for indexing. Therefore, `deque` is best suited for operations where elements are added/removed from ends.
 
 ## Priority Queue
 
@@ -353,8 +512,8 @@ These structures can be used when sorted dict or set is required.
 
 | **Structure** | **Initialization Example**                                                                                                                                                  |
 |---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `SortedDict`  | `from sortedcontainers import SortedDict`<br>`sorted_dict = SortedDict({5: "five", 1: "one", 3: "three"})`<br>Automatically sorts keys: `{1: "one", 3: "three", 5: "five"}` |
-| `SortedSet`   | `from sortedcontainers import SortedSet`<br>`sorted_set = SortedSet([5, 1, 3, 1])`<br>Automatically sorts and removes duplicates: `[1, 3, 5]`                               |
+| `SortedDict`  | `from sortedcontainers import SortedDict`<br/>`sorted_dict = SortedDict({5: "five", 1: "one", 3: "three"})`<br/>Automatically sorts keys: `{1: "one", 3: "three", 5: "five"}` |
+| `SortedSet`   | `from sortedcontainers import SortedSet`<br/>`sorted_set = SortedSet([5, 1, 3, 1])`<br/>Automatically sorts and removes duplicates: `[1, 3, 5]`                               |
 
 ---
 
@@ -365,11 +524,11 @@ These structures can be used when sorted dict or set is required.
 | **`keys()`**                              | Returns a `SortedKeysView` of all the keys in sorted order.                                                                | `sorted_dict.keys()` → `SortedKeysView([1, 3, 5])`                                               |
 | **`values()`**                            | Returns a `SortedValuesView` of all the values in the dictionary.                                                          | `sorted_dict.values()` → `SortedValuesView(["one", "three", "five"])`                            |
 | **`items()`**                             | Returns a `SortedItemsView` of key-value pairs in sorted order.                                                            | `sorted_dict.items()` → `SortedItemsView([(1, "one"), (3, "three"), (5, "five")])`               |
-| **`add(value)`** *(SortedSet only)*       | Adds an element to the set while maintaining sorted order.                                                                 | `sorted_set.add(4)`<br>`sorted_set` → `[1, 3, 4, 5]`                                             |
-| **`discard(value)`**                      | Removes an element from the set if it exists; does nothing otherwise.                                                      | `sorted_set.discard(3)`<br>`sorted_set` → `[1, 5]`                                               |
-| **`bisect_left(key)`**                    | Returns the index where `key` would fit in the sorted order, keeping duplicates on the **right**.                          | `sorted_dict.bisect_left(3)` → `1`<br>`sorted_set.bisect_left(4)` → `2`                          |
-| **`bisect_right(key)`**                   | Returns the index where `key` would fit in the sorted order, keeping duplicates on the **left**.                           | `sorted_dict.bisect_right(3)` → `2`<br>`sorted_set.bisect_right(4)` → `3`                        |
-| **`irange(start, end)`**                  | Returns an iterator over the range of keys (or values for `SortedSet`) between `start` and `end` (inclusive or exclusive). | `sorted_dict.irange(2, 4)` → `[3]`<br>`sorted_set.irange(2, 4, inclusive=(True, False))` → `[3]` |
+| **`add(value)`** *(SortedSet only)*       | Adds an element to the set while maintaining sorted order.                                                                 | `sorted_set.add(4)`<br/>`sorted_set` → `[1, 3, 4, 5]`                                             |
+| **`discard(value)`**                      | Removes an element from the set if it exists; does nothing otherwise.                                                      | `sorted_set.discard(3)`<br/>`sorted_set` → `[1, 5]`                                               |
+| **`bisect_left(key)`**                    | Returns the index where `key` would fit in the sorted order, keeping duplicates on the **right**.                          | `sorted_dict.bisect_left(3)` → `1`<br/>`sorted_set.bisect_left(4)` → `2`                          |
+| **`bisect_right(key)`**                   | Returns the index where `key` would fit in the sorted order, keeping duplicates on the **left**.                           | `sorted_dict.bisect_right(3)` → `2`<br/>`sorted_set.bisect_right(4)` → `3`                        |
+| **`irange(start, end)`**                  | Returns an iterator over the range of keys (or values for `SortedSet`) between `start` and `end` (inclusive or exclusive). | `sorted_dict.irange(2, 4)` → `[3]`<br/>`sorted_set.irange(2, 4, inclusive=(True, False))` → `[3]` |
 | **`peekitem(index)`** *(SortedDict only)* | Returns the key-value pair at the specified index.                                                                         | `sorted_dict.peekitem(0)` → `(1, "one")`                                                         |
 
 ---
@@ -485,8 +644,8 @@ Here’s how to use it:
 |----------------|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|----------------|
 | `bisect_left`  | Finds the index to insert an element while maintaining order. Returns the **first valid position** for duplicates.  | `bisect.bisect_left([1, 3, 4, 7], 4)`                          | `2`            |
 | `bisect_right` | Finds the index to insert an element while maintaining order. Returns the **next valid position** after duplicates. | `bisect.bisect_right([1, 3, 4, 7], 4)`                         | `3`            |
-| `insort_left`  | Inserts an element into the list at the position determined by `bisect_left`.                                       | `lst = [1, 3, 4]; bisect.insort_left(lst, 2)`<br>`print(lst)`  | `[1, 2, 3, 4]` |
-| `insort_right` | Inserts an element into the list at the position determined by `bisect_right`.                                      | `lst = [1, 3, 4]; bisect.insort_right(lst, 2)`<br>`print(lst)` | `[1, 2, 3, 4]` |
+| `insort_left`  | Inserts an element into the list at the position determined by `bisect_left`.                                       | `lst = [1, 3, 4]; bisect.insort_left(lst, 2)`<br/>`print(lst)`  | `[1, 2, 3, 4]` |
+| `insort_right` | Inserts an element into the list at the position determined by `bisect_right`.                                      | `lst = [1, 3, 4]; bisect.insort_right(lst, 2)`<br/>`print(lst)` | `[1, 2, 3, 4]` |
 
 ### Notes:
 
