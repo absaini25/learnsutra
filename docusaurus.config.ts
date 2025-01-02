@@ -95,6 +95,18 @@ const config: Config = {
 
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'system-design', // Unique ID for the database docs instance
+        path: 'system-design', // Path to the database directory
+        routeBasePath: 'system-design', // The URL route for the database section
+        sidebarPath: require.resolve('./sidebars.js'), // Optional: Define a sidebar for this section
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/absaini25/learnsutra/edit/main/', // Add the edit URL for /database section
+      },
+    ]
   ],
 
   themeConfig: {
@@ -114,6 +126,7 @@ const config: Config = {
           label: 'Data Structures and Algorithms',
         },
         {to: '/database', label: 'Databases', position: 'left'},
+        {to: '/system-design', label: 'System Design', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/absaini25/learnsutra',
