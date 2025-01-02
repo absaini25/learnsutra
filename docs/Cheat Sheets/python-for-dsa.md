@@ -153,11 +153,157 @@ print(MyClass.static_method())  # "Static methods are not tied to class or insta
 
 ## Conditions
 
+### **Basic Conditional Statements**
+- **`if`**: Executes a block of code if the condition is `True`.
+- **`elif`**: Adds more conditions to an `if` statement.
+- **`else`**: Executes when no preceding conditions are `True`.
+
+```python
+x = 10
+if x > 5:
+    print("x is greater than 5")
+elif x == 5:
+    print("x is exactly 5")
+else:
+    print("x is less than 5")
+```
+
+---
+
+### **Comparison Operators**
+Used to compare values:
+- `==` : Equal to
+- `!=` : Not equal to
+- `<`, `>`, `<=`, `>=` : Less than, greater than, etc.
+
+---
+
+### **Logical Operators**
+Combine conditions:
+- **`and`**: Both conditions must be `True`.
+- **`or`**: At least one condition must be `True`.
+- **`not`**: Negates a condition.
+
+```python
+x = 7
+if x > 5 and x < 10:
+    print("x is between 5 and 10")
+```
+
+---
+
+### **Membership Operators**
+Check for membership:
+- `in`: Checks if a value exists in a sequence.
+- `not in`: Checks if a value does not exist in a sequence.
+
+```python
+fruits = ["apple", "banana", "cherry"]
+if "apple" in fruits:
+    print("Apple is in the list!")
+```
+
+---
+
+### **Ternary Conditions**
+A concise way to write `if-else` in a single line:
+```python
+x = 10
+result = "Positive" if x > 0 else "Non-positive"
+print(result)
+```
+
+---
+
 ## List
 
 ### Array Slicing
 
+Array slicing is a powerful way to access subsets of elements in sequences like lists, strings, and tuples. Here's how it works:
+
+---
+
+### **Syntax**
+```python
+sequence[start:stop:step]
+```
+- **`start`**: Index to begin slicing (inclusive). Defaults to `0`.
+- **`stop`**: Index to end slicing (exclusive). Defaults to the sequence's length.
+- **`step`**: Interval between elements. Defaults to `1`.
+
+---
+
+### **Examples**
+```python
+arr = [0, 1, 2, 3, 4, 5]
+
+# Basic Slicing
+print(arr[1:4])      # Output: [1, 2, 3]
+
+# Skipping Elements
+print(arr[::2])      # Output: [0, 2, 4]
+
+# Reverse Slicing
+print(arr[::-1])     # Output: [5, 4, 3, 2, 1, 0]
+
+# Omitting Start/Stop
+print(arr[:3])       # Output: [0, 1, 2]
+print(arr[3:])       # Output: [3, 4, 5]
+
+# Negative Indices
+print(arr[-3:])      # Output: [3, 4, 5]
+
+# Out-of-Range Indices
+print(arr[1:10])     # Output: [1, 2, 3, 4, 5]
+```
+
+---
+
+### **Tips**:
+1. Slicing creates a **shallow copy**, not a reference.
+2. Use `step` for custom intervals or reversed slices.
+3. Out-of-range indices are handled gracefully.
+
 ### Using as a stack
+
+### Using a List as a Stack in Python 🐍
+
+In Python, lists can be efficiently used as a stack (LIFO: Last In, First Out) with the following operations:
+
+---
+
+### **Operations**:
+1. **Push**: Add an element to the stack using `append()`.
+2. **Pop**: Remove and return the top element using `pop()`.
+3. **Peek**: Access the top element without removing it using indexing.
+
+---
+
+### **Example**:
+```python
+stack = []
+
+# Push elements onto the stack
+stack.append(10)  # Stack: [10]
+stack.append(20)  # Stack: [10, 20]
+stack.append(30)  # Stack: [10, 20, 30]
+
+# Pop the top element
+top = stack.pop()  # Returns 30, Stack: [10, 20]
+
+# Peek the top element
+print(stack[-1])    # Output: 20 (top of the stack)
+
+# Check if stack is empty
+print(len(stack) == 0)  # Output: False
+```
+
+---
+
+### **Notes**:
+- **Push**: `O(1)`
+- **Pop**: `O(1)`
+- **Peek**: `O(1)`
 
 ### Zipping lists
 
@@ -197,7 +343,150 @@ print(zipped)  # Output: [(1, 'a'), (2, 'b')]
 - **Important!**:`zip` does not create another list. So, we cannot use things like `zip(list1, list2)[i]` or
   `len(zip(list1, list2))` on it's output. Thus, the above examples are creating a new list out of zip's output.
 
+
+## List comprehension
+
+List comprehension is a concise way to create lists in Python. It's a powerful tool for filtering, transforming, or constructing new lists from existing ones.
+
+---
+
+### **Syntax of List Comprehension**:
+```python
+[expression for item in iterable if condition]
+```
+- **`expression`**: The value to add to the new list.
+- **`item`**: The variable representing each element in the iterable.
+- **`iterable`**: A sequence (like a list, range, etc.).
+- **`condition`**: An optional filter to include only items that satisfy the condition.
+
+---
+
+### **Basic Example**:
+```python
+# Create a list of squares
+squares = [x**2 for x in range(5)]  
+print(squares)  # Output: [0, 1, 4, 9, 16]
+```
+
+---
+
+### **Using List Comprehension for Filtering**:
+You can filter elements by adding a condition to the comprehension.
+
+```python
+# Get even numbers from a list
+numbers = [1, 2, 3, 4, 5, 6]
+evens = [x for x in numbers if x % 2 == 0]
+print(evens)  # Output: [2, 4, 6]
+```
+
+---
+
+### **Using List Comprehension for Mapping (Transforming)**:
+You can apply a transformation to each item in a list.
+
+```python
+# Square each number in the list
+numbers = [1, 2, 3, 4]
+squared = [x**2 for x in numbers]
+print(squared)  # Output: [1, 4, 9, 16]
+```
+
+---
+
+### **Combining Filtering and Mapping**:
+You can filter and transform in one step.
+
+```python
+# Get the squares of even numbers only
+numbers = [1, 2, 3, 4, 5, 6]
+even_squares = [x**2 for x in numbers if x % 2 == 0]
+print(even_squares)  # Output: [4, 16, 36]
+```
+
+---
+
+### **Nested List Comprehensions**:
+List comprehensions can also be nested to process multi-dimensional data.
+
+```python
+# Flatten a 2D list
+matrix = [[1, 2], [3, 4], [5, 6]]
+flattened = [item for sublist in matrix for item in sublist]
+print(flattened)  # Output: [1, 2, 3, 4, 5, 6]
+```
+
+---
+
 ## Tuples
+
+Tuples are one of the core data structures in Python, offering an immutable and ordered collection of elements.
+
+---
+
+### **What is a Tuple?**
+A tuple is a sequence of values that can be of any type, but once created, it cannot be modified (immutable). It is defined using parentheses `()`.
+
+```python
+my_tuple = (1, 2, 3)
+```
+
+---
+
+### **Key Properties**:
+1. **Immutable**: Once created, you cannot add, remove, or change elements in a tuple.
+   ```python
+   # my_tuple[0] = 10  # This would raise an error
+   ```
+
+2. **Ordered**: The order of elements is preserved.
+   ```python
+   my_tuple = (10, 20, 30)
+   print(my_tuple[1])  # Output: 20
+   ```
+
+3. **Supports Multiple Data Types**:
+   Tuples can store elements of different data types.
+   ```python
+   mixed_tuple = (1, "hello", 3.14)
+   ```
+
+4. **Can Contain Nested Tuples**:
+   You can have tuples inside other tuples.
+   ```python
+   nested_tuple = ((1, 2), (3, 4))
+   ```
+
+---
+
+### **Common Tuple Operations**:
+- **Accessing Elements**: Use indexing to retrieve values.
+  ```python
+  my_tuple = (1, 2, 3)
+  print(my_tuple[0])  # Output: 1
+  ```
+
+- **Concatenation**: Combine tuples.
+  ```python
+  tuple1 = (1, 2)
+  tuple2 = (3, 4)
+  print(tuple1 + tuple2)  # Output: (1, 2, 3, 4)
+  ```
+
+- **Repetition**: Repeat elements in a tuple.
+  ```python
+  tuple3 = (1, 2)
+  print(tuple3 * 3)  # Output: (1, 2, 1, 2, 1, 2)
+  ```
+
+---
+
+### **When to Use Tuples**:
+- **Immutability**: When you need a collection of data that should not change.
+- **Performance**: Tuples are slightly faster than lists due to their immutability.
+- **Hashable**: Tuples can be used as keys in dictionaries, unlike lists.
+
+---
 
 ## String
 
