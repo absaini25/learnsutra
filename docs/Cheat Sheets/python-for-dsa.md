@@ -266,8 +266,6 @@ print(arr[1:10])     # Output: [1, 2, 3, 4, 5]
 
 ### Using as a stack
 
-### Using a List as a Stack in Python 🐍
-
 In Python, lists can be efficiently used as a stack (LIFO: Last In, First Out) with the following operations:
 
 ---
@@ -884,6 +882,41 @@ sorted_set = SortedSet([1, 3, 5])
 # Get elements between 2 and 5, excluding 5
 elements_in_range = list(sorted_set.irange(2, 5, inclusive=(True, False)))
 print(elements_in_range)  # Output: [3]
+```
+
+---
+
+## Ordered Dict
+
+`OrderedDict` is a subclass of `dict` in the `collections` module that remembers the order in which items are inserted.
+
+---
+
+### **Key Features**:
+1. **Preserves Insertion Order**: Items are iterated in the order they were added.
+2. **Efficient Reordering**:
+    - Use `move_to_end(key, last=True)` to move a key to the beginning or end.
+3. **Dictionary-Like Operations**: Supports all standard `dict` operations (e.g., `get`, `set`, `pop`, etc.).
+
+---
+
+### **Example**:
+```python
+from collections import OrderedDict
+
+# Create an OrderedDict
+od = OrderedDict()
+od['a'] = 1
+od['b'] = 2
+od['c'] = 3
+
+# Access and reorder
+od.move_to_end('a')  # Moves 'a' to the end
+print(od)  # Output: OrderedDict([('b', 2), ('c', 3), ('a', 1)])
+
+# Remove the first item
+od.popitem(last=False)  # Removes 'b'
+print(od)  # Output: OrderedDict([('c', 3), ('a', 1)])
 ```
 
 ---
