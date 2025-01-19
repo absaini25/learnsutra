@@ -561,6 +561,7 @@ for letter in s:
 - `max()` and `min()` can be used to find the maximum and minimum of the elements. Works both with individual items like
   `max(item1, item2)` or over list like `max(list)`
 - `sum()` can be used to calculate sum of the input arguments (list or elements).
+- `accumulate()` can be used to create a prefix sum array.
 - To find a **random number** we can use: <br/>
 
 ```python
